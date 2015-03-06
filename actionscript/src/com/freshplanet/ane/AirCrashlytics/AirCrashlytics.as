@@ -39,7 +39,7 @@ package com.freshplanet.ane.AirCrashlytics
 		{
 			call("start");
 			
-			log("Crashlytics " + version + " initialized with API key " + apiKey);
+			logConsole("Crashlytics " + version + " initialized with API key " + apiKey);
 		}
 		
 		public static function crash():void
@@ -48,7 +48,7 @@ package com.freshplanet.ane.AirCrashlytics
 			
 			if (!worked && Capabilities.manufacturer.indexOf("Android") > -1)
 			{
-				log("In order to force a crash on Android, you need to declare the following activity in your manifest: com.freshplanet.ane.AirCrashlytics.activities.CrashActivity");
+				logConsole("In order to force a crash on Android, you need to declare the following activity in your manifest: com.freshplanet.ane.AirCrashlytics.activities.CrashActivity");
 			}
 		}
 		
@@ -95,7 +95,7 @@ package com.freshplanet.ane.AirCrashlytics
 			call("setString", key, value);
 		}
 
-		public static function logCrash(message:String):void
+		public static function log(message:String):void
 		{
 			call("log", message);
 		}
@@ -119,7 +119,7 @@ package com.freshplanet.ane.AirCrashlytics
 			return _context.call.apply(_context, args);
 		}
 		
-		private static function log(msg:String):void
+		private static function logConsole(msg:String):void
 		{
 			trace("[Crashlytics] " + msg);
 		}
