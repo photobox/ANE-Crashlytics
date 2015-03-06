@@ -90,6 +90,17 @@ DEFINE_ANE_FUNCTION(AirCrashlyticsSetString)
     NSString *key = FPANE_FREObjectToNSString(argv[0]);
     NSString *value = FPANE_FREObjectToNSString(argv[1]);
     [Crashlytics setObjectValue:value forKey:key];
+    
+    CLS_LOG(@"Log awesomeness key=%@, value=%@", key, value);
+    return nil;
+}
+
+DEFINE_ANE_FUNCTION(AirCrashlyticsLog)
+{
+    NSString *message = FPANE_FREObjectToNSString(argv[0]);
+    
+    CLS_LOG(@"[ Crashlytics ] %@", message);
+    
     return nil;
 }
 
@@ -109,7 +120,8 @@ void AirCrashlyticsContextInitializer(void* extData, const uint8_t* ctxType, FRE
         @"setBool":             [NSValue valueWithPointer:&AirCrashlyticsSetBool],
         @"setInt":              [NSValue valueWithPointer:&AirCrashlyticsSetInt],
         @"setFloat":            [NSValue valueWithPointer:&AirCrashlyticsSetFloat],
-        @"setString":           [NSValue valueWithPointer:&AirCrashlyticsSetString]
+        @"setString":           [NSValue valueWithPointer:&AirCrashlyticsSetString],
+        @"log":                 [NSValue valueWithPointer:&AirCrashlyticsLog]
     };
     
     *numFunctionsToTest = (uint32_t)[functions count];

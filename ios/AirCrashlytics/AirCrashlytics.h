@@ -28,6 +28,7 @@ DEFINE_ANE_FUNCTION(AirCrashlyticsSetBool);
 DEFINE_ANE_FUNCTION(AirCrashlyticsSetInt);
 DEFINE_ANE_FUNCTION(AirCrashlyticsSetFloat);
 DEFINE_ANE_FUNCTION(AirCrashlyticsSetString);
+DEFINE_ANE_FUNCTION(AirCrashlyticsLog);
 
 
 // ANE Setup

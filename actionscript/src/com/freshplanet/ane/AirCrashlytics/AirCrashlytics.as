@@ -94,6 +94,11 @@ package com.freshplanet.ane.AirCrashlytics
 		{
 			call("setString", key, value);
 		}
+
+		public static function logCrash(message:String):void
+		{
+			call("log", message);
+		}
 		
 		// --------------------------------------------------------------------------------------//
 		//																						 //
