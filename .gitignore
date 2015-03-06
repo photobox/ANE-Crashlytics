@@ -13,9 +13,14 @@ actionscript/bin
 .project
 
 # Android
+android/assets
 android/bin
 android/gen
 android/lint.xml
+android/res/drawable*
+android/res/values/strings.xml
+android/res/layout
+android/AndroidManifest.xml
 .classpath
 proguard-project.txt
 project.properties
