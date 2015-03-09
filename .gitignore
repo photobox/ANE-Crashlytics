@@ -1,6 +1,7 @@
 # General
 temp
 build.config
+*.iws
 
 # Flash Builder
 actionscript/bin
