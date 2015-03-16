@@ -99,6 +99,11 @@ package com.freshplanet.ane.AirCrashlytics
 		{
 			call("log", message);
 		}
+
+		public static function crashAndLog(name:String, stack:String):void
+		{
+			call("crashAndLog", name, stack);
+		}
 		
 		// --------------------------------------------------------------------------------------//
 		//																						 //
@@ -115,13 +120,15 @@ package com.freshplanet.ane.AirCrashlytics
 			if (!isSupported) return null;
 			
 			if (!_context) throw new Error("Extension context is null. Please check if extension.xml is setup correctly.");
+
+			logConsole("methods call " + args[0]);
 			
 			return _context.call.apply(_context, args);
 		}
 		
 		private static function logConsole(msg:String):void
 		{
-			trace("[Crashlytics] " + msg);
+			trace("[ Crashlytics ] " + msg);
 		}
 	}
 }

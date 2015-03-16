@@ -32,8 +32,8 @@
     <platform name="Android-ARM"> 
         <applicationDeployment> 
             <nativeLibrary>libAirCrashlytics.jar</nativeLibrary> 
-            <initializer>com.freshplanet.ane.AirCrashlytics.Extension</initializer> 
-            <finalizer>com.freshplanet.ane.AirCrashlytics.Extension</finalizer> 
+            <initializer>com.freshplanet.ane.AirCrashlytics.Extension</initializer>
+            <finalizer>com.freshplanet.ane.AirCrashlytics.Extension</finalizer>
         </applicationDeployment> 
     </platform> 
     

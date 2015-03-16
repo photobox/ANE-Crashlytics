@@ -23,7 +23,18 @@ import java.util.Map;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
-import com.freshplanet.ane.AirCrashlytics.functions.*;
+import com.freshplanet.ane.AirCrashlytics.functions.CrashFunction;
+import com.freshplanet.ane.AirCrashlytics.functions.GetApiKeyFunction;
+import com.freshplanet.ane.AirCrashlytics.functions.GetVersionFunction;
+import com.freshplanet.ane.AirCrashlytics.functions.SetBoolFunction;
+import com.freshplanet.ane.AirCrashlytics.functions.SetDebugModeFunction;
+import com.freshplanet.ane.AirCrashlytics.functions.SetFloatFunction;
+import com.freshplanet.ane.AirCrashlytics.functions.SetIntFunction;
+import com.freshplanet.ane.AirCrashlytics.functions.SetStringFunction;
+import com.freshplanet.ane.AirCrashlytics.functions.SetUserIdentifierFunction;
+import com.freshplanet.ane.AirCrashlytics.functions.StartFunction;
+import com.freshplanet.ane.AirCrashlytics.functions.LogAndExitFunction;
+import com.freshplanet.ane.AirCrashlytics.functions.LogFunction;
 
 public class ExtensionContext extends FREContext
 {
@@ -49,6 +60,7 @@ public class ExtensionContext extends FREContext
 		functions.put("setFloat", new SetFloatFunction());
 		functions.put("setString", new SetStringFunction());
 		functions.put("log", new LogFunction());
+		functions.put("crashAndLog", new LogAndExitFunction());
 
 		return functions;	
 	}

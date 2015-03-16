@@ -24,6 +24,8 @@ static FREContext context;
 
 DEFINE_ANE_FUNCTION(AirCrashlyticsStart)
 {
+    NSLog(@"[ Crashlytics ] ANE -> AirCrashlyticsStart");
+    
     NSString *apiKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CrashlyticsAPIKey"];
     [Crashlytics startWithAPIKey:apiKey];
     return nil;
@@ -31,24 +33,44 @@ DEFINE_ANE_FUNCTION(AirCrashlyticsStart)
 
 DEFINE_ANE_FUNCTION(AirCrashlyticsCrash)
 {
+    NSLog(@"[ Crashlytics ] ANE -> AirCrashlyticsCrash");
+    
     [[Crashlytics sharedInstance] crash];
+    return FPANE_BOOLToFREObject(YES);
+}
+
+DEFINE_ANE_FUNCTION(AirCrashlyticsLogAndExit)
+{
+    NSString *name = FPANE_FREObjectToNSString(argv[0]);
+    NSString *stack = FPANE_FREObjectToNSString(argv[1]);
+    
+    CLS_LOG(@"ERROR: %@\n%@", name, stack);
+    
+    @throw [NSException exceptionWithName:name reason:stack userInfo:nil];
+    
     return FPANE_BOOLToFREObject(YES);
 }
 
 DEFINE_ANE_FUNCTION(AirCrashlyticsGetApiKey)
 {
+    NSLog(@"[ Crashlytics ] ANE -> AirCrashlyticsGetApiKey");
+    
     NSString *apiKey = [[Crashlytics sharedInstance] apiKey];
     return FPANE_NSStringToFREOBject(apiKey);
 }
 
 DEFINE_ANE_FUNCTION(AirCrashlyticsGetVersion)
 {
+    NSLog(@"[ Crashlytics ] ANE -> AirCrashlyticsGetVersion");
+    
     NSString *version = [[Crashlytics sharedInstance] version];
     return FPANE_NSStringToFREOBject(version);
 }
 
 DEFINE_ANE_FUNCTION(AirCrashlyticsSetDebugMode)
 {
+    NSLog(@"[ Crashlytics ] ANE -> AirCrashlyticsSetDebugMode");
+    
     BOOL debugMode = FPANE_FREObjectToBOOL(argv[0]);
     [[Crashlytics sharedInstance] setDebugMode:debugMode];
     return nil;
@@ -56,6 +78,8 @@ DEFINE_ANE_FUNCTION(AirCrashlyticsSetDebugMode)
 
 DEFINE_ANE_FUNCTION(AirCrashlyticsSetUserIdentifier)
 {
+    NSLog(@"[ Crashlytics ] ANE -> AirCrashlyticsSetUserIdentifier");
+    
     NSString *userIdentifier = FPANE_FREObjectToNSString(argv[0]);
     [Crashlytics setUserIdentifier:userIdentifier];
     return nil;
@@ -63,6 +87,8 @@ DEFINE_ANE_FUNCTION(AirCrashlyticsSetUserIdentifier)
 
 DEFINE_ANE_FUNCTION(AirCrashlyticsSetBool)
 {
+    NSLog(@"[ Crashlytics ] ANE -> AirCrashlyticsSetBool");
+    
     NSString *key = FPANE_FREObjectToNSString(argv[0]);
     BOOL value = FPANE_FREObjectToBOOL(argv[1]);
     [Crashlytics setBoolValue:value forKey:key];
@@ -71,6 +97,8 @@ DEFINE_ANE_FUNCTION(AirCrashlyticsSetBool)
 
 DEFINE_ANE_FUNCTION(AirCrashlyticsSetInt)
 {
+    NSLog(@"[ Crashlytics ] ANE -> AirCrashlyticsSetInt");
+    
     NSString *key = FPANE_FREObjectToNSString(argv[0]);
     NSInteger value = FPANE_FREObjectToNSInteger(argv[1]);
     [Crashlytics setIntValue:(int)value forKey:key];
@@ -79,6 +107,8 @@ DEFINE_ANE_FUNCTION(AirCrashlyticsSetInt)
 
 DEFINE_ANE_FUNCTION(AirCrashlyticsSetFloat)
 {
+    NSLog(@"[ Crashlytics ] ANE -> AirCrashlyticsSetFloat");
+    
     NSString *key = FPANE_FREObjectToNSString(argv[0]);
     double value = FPANE_FREObjectToDouble(argv[1]);
     [Crashlytics setFloatValue:(float)value forKey:key];
@@ -87,6 +117,8 @@ DEFINE_ANE_FUNCTION(AirCrashlyticsSetFloat)
 
 DEFINE_ANE_FUNCTION(AirCrashlyticsSetString)
 {
+    NSLog(@"[ Crashlytics ] ANE -> AirCrashlyticsSetString");
+    
     NSString *key = FPANE_FREObjectToNSString(argv[0]);
     NSString *value = FPANE_FREObjectToNSString(argv[1]);
     [Crashlytics setObjectValue:value forKey:key];
@@ -97,6 +129,8 @@ DEFINE_ANE_FUNCTION(AirCrashlyticsSetString)
 
 DEFINE_ANE_FUNCTION(AirCrashlyticsLog)
 {
+    NSLog(@"[ Crashlytics ] ANE -> AirCrashlyticsLog");
+    
     NSString *message = FPANE_FREObjectToNSString(argv[0]);
     
     CLS_LOG(@"[ Crashlytics ] %@", message);
@@ -121,7 +155,8 @@ void AirCrashlyticsContextInitializer(void* extData, const uint8_t* ctxType, FRE
         @"setInt":              [NSValue valueWithPointer:&AirCrashlyticsSetInt],
         @"setFloat":            [NSValue valueWithPointer:&AirCrashlyticsSetFloat],
         @"setString":           [NSValue valueWithPointer:&AirCrashlyticsSetString],
-        @"log":                 [NSValue valueWithPointer:&AirCrashlyticsLog]
+        @"log":                 [NSValue valueWithPointer:&AirCrashlyticsLog],
+        @"crashAndLog":         [NSValue valueWithPointer:&AirCrashlyticsLogAndExit]
     };
     
     *numFunctionsToTest = (uint32_t)[functions count];

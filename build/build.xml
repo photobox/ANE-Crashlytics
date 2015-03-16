@@ -76,7 +76,7 @@
             <fileset dir="../android/res"/>
         </copy>
 
-        <delete dir="../android/temp"/>
+       <delete dir="../android/temp"/>
     </target>
 
     <!-- Actionscript -->
@@ -91,7 +91,7 @@
             <regexpmapper from=".*src.(.*)\.as" to="\1"/>
         </pathconvert>
 
-        <exec executable="${flex.sdk}/bin/compc${bin.ext}" failonerror="true">
+        <exec executable="${flex.sdk}/bin/acompc${bin.ext}" failonerror="true">
             <env key="AIR_SDK_HOME" value="${flex.sdk}"/>
             <arg line='-source-path ../actionscript/src'/>
             <arg line='-output ../temp/swc/${name}.swc'/>
