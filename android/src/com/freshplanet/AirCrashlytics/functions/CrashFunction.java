@@ -16,22 +16,27 @@
 //  
 //////////////////////////////////////////////////////////////////////////////////////
 
-package com.freshplanet.ane.AirCrashlytics.functions;
+package com.freshplanet.AirCrashlytics.functions;
+
+import android.content.Intent;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREObject;
-import com.crashlytics.android.Crashlytics;
+import com.freshplanet.AirCrashlytics.activities.CrashActivity;
 
-public class SetBoolFunction extends BaseFunction
-{
-	public FREObject call(FREContext context, FREObject[] args)
-	{
+public class CrashFunction extends BaseFunction {
+	public FREObject call(FREContext context, FREObject[] args) {
 		super.call(context, args);
-		
-		String key = getStringFromFREObject(args[0]);
-		Boolean value = getBooleanFromFREObject(args[1]);
-		Crashlytics.setBool(key, value);
-		
-		return null;
+
+		Intent intent = new Intent(context.getActivity().getApplicationContext(), CrashActivity.class);
+		Boolean activityDeclared = (context.getActivity().getPackageManager().resolveActivity(intent, 0) != null);
+		context.getActivity().startActivity(intent);
+
+		try {
+			return FREObject.newObject(activityDeclared);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

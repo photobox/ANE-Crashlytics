@@ -16,39 +16,36 @@
 //  
 //////////////////////////////////////////////////////////////////////////////////////
 
-package com.freshplanet.ane.AirCrashlytics;
+package com.freshplanet.AirCrashlytics;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
-import com.freshplanet.ane.AirCrashlytics.functions.CrashFunction;
-import com.freshplanet.ane.AirCrashlytics.functions.GetApiKeyFunction;
-import com.freshplanet.ane.AirCrashlytics.functions.GetVersionFunction;
-import com.freshplanet.ane.AirCrashlytics.functions.SetBoolFunction;
-import com.freshplanet.ane.AirCrashlytics.functions.SetDebugModeFunction;
-import com.freshplanet.ane.AirCrashlytics.functions.SetFloatFunction;
-import com.freshplanet.ane.AirCrashlytics.functions.SetIntFunction;
-import com.freshplanet.ane.AirCrashlytics.functions.SetStringFunction;
-import com.freshplanet.ane.AirCrashlytics.functions.SetUserIdentifierFunction;
-import com.freshplanet.ane.AirCrashlytics.functions.StartFunction;
-import com.freshplanet.ane.AirCrashlytics.functions.LogAndExitFunction;
-import com.freshplanet.ane.AirCrashlytics.functions.LogFunction;
+import com.freshplanet.AirCrashlytics.functions.CrashFunction;
+import com.freshplanet.AirCrashlytics.functions.GetApiKeyFunction;
+import com.freshplanet.AirCrashlytics.functions.GetVersionFunction;
+import com.freshplanet.AirCrashlytics.functions.SetBoolFunction;
+import com.freshplanet.AirCrashlytics.functions.SetDebugModeFunction;
+import com.freshplanet.AirCrashlytics.functions.SetFloatFunction;
+import com.freshplanet.AirCrashlytics.functions.SetIntFunction;
+import com.freshplanet.AirCrashlytics.functions.SetStringFunction;
+import com.freshplanet.AirCrashlytics.functions.SetUserIdentifierFunction;
+import com.freshplanet.AirCrashlytics.functions.StartFunction;
+import com.freshplanet.AirCrashlytics.functions.LogAndExitFunction;
+import com.freshplanet.AirCrashlytics.functions.LogFunction;
 
-public class ExtensionContext extends FREContext
-{
+public class ExtensionContext extends FREContext {
 	@Override
-	public void dispose()
-	{
+	public void dispose() {
 		Extension.context = null;
 	}
 
 	@Override
-	public Map<String, FREFunction> getFunctions()
-	{
+	public Map<String, FREFunction> getFunctions() {
 		Map<String, FREFunction> functions = new HashMap<String, FREFunction>();
-		
+
 		functions.put("start", new StartFunction());
 		functions.put("crash", new CrashFunction());
 		functions.put("getApiKey", new GetApiKeyFunction());
@@ -62,6 +59,6 @@ public class ExtensionContext extends FREContext
 		functions.put("log", new LogFunction());
 		functions.put("crashAndLog", new LogAndExitFunction());
 
-		return functions;	
+		return functions;
 	}
 }

@@ -16,20 +16,19 @@
 //  
 //////////////////////////////////////////////////////////////////////////////////////
 
-package com.freshplanet.ane.AirCrashlytics.functions;
+package com.freshplanet.AirCrashlytics.functions;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREObject;
 import com.crashlytics.android.Crashlytics;
 
-public class StartFunction extends BaseFunction
-{
-	public FREObject call(FREContext context, FREObject[] args)
-	{
+public class SetUserIdentifierFunction extends BaseFunction {
+	public FREObject call(FREContext context, FREObject[] args) {
 		super.call(context, args);
-		
-		Crashlytics.start(context.getActivity());
-		
+
+		String userIdentifier = getStringFromFREObject(args[0]);
+		Crashlytics.setUserIdentifier(userIdentifier);
+
 		return null;
 	}
 }

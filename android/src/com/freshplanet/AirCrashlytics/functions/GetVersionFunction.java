@@ -16,22 +16,21 @@
 //  
 //////////////////////////////////////////////////////////////////////////////////////
 
-package com.freshplanet.ane.AirCrashlytics.functions;
+package com.freshplanet.AirCrashlytics.functions;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREObject;
 import com.crashlytics.android.Crashlytics;
 
-public class SetIntFunction extends BaseFunction
-{
-	public FREObject call(FREContext context, FREObject[] args)
-	{
+public class GetVersionFunction extends BaseFunction {
+	public FREObject call(FREContext context, FREObject[] args) {
 		super.call(context, args);
-		
-		String key = getStringFromFREObject(args[0]);
-		int value = getIntFromFREObject(args[1]);
-		Crashlytics.setInt(key, value);
-		
-		return null;
+
+		try {
+			return FREObject.newObject(Crashlytics.getCrashlyticsVersion());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

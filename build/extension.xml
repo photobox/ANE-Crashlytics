@@ -21,7 +21,15 @@
   <versionNumber>1.0</versionNumber>
   <platforms>
 
-    <platform name="iPhone-ARM">
+	  <platform name="Android-ARM">
+		  <applicationDeployment>
+			  <nativeLibrary>libAirCrashlytics.jar</nativeLibrary>
+			  <initializer>com.freshplanet.AirCrashlytics.Extension</initializer>
+			  <finalizer>com.freshplanet.AirCrashlytics.Extension</finalizer>
+		  </applicationDeployment>
+	  </platform>
+
+	  <platform name="iPhone-ARM">
         <applicationDeployment>
             <nativeLibrary>libAirCrashlytics.a</nativeLibrary>
             <initializer>AirCrashlyticsInitializer</initializer> 
@@ -29,15 +37,7 @@
         </applicationDeployment>
     </platform>
 
-    <platform name="Android-ARM"> 
-        <applicationDeployment> 
-            <nativeLibrary>libAirCrashlytics.jar</nativeLibrary> 
-            <initializer>com.freshplanet.ane.AirCrashlytics.Extension</initializer>
-            <finalizer>com.freshplanet.ane.AirCrashlytics.Extension</finalizer>
-        </applicationDeployment> 
-    </platform> 
-    
-    <platform name="default"> 
+    <platform name="default">
         <applicationDeployment/> 
     </platform> 
   </platforms>

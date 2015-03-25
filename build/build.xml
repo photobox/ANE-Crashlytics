@@ -51,7 +51,7 @@
 
         <echo message="Using Java version ${ant.java.version}."/>
 
-        <javac source="1.6" srcdir="../android/src" destdir="../android/temp/classes" includeantruntime="false" debug="${ANDROID_DEBUG}">
+        <javac srcdir="../android/src" destdir="../android/temp/classes" includeantruntime="false" debug="${ANDROID_DEBUG}">
             <classpath>
                 <pathelement location="${android.sdk}/android.jar"/>
                 <pathelement location="${flex.sdk}/lib/android/FlashRuntimeExtensions.jar"/>
@@ -61,17 +61,17 @@
 
         <mkdir dir="../temp/android/"/>
 
-        <!--
+		<!--
             Build jar library
 
             crashlytics.jar contains classes with the same name but different case (eg. a.class and A.class).
             Since Mac OS X's filesystem is case-insensitive, unzipping this jar destroys some of its classes.
             The solution we fallback on is to copy the jar, rename it, and update it by adding our own classes.
-        -->
+		-->
+
         <copy file="../android/libs/crashlytics.jar" tofile="../temp/android/lib${name}.jar"/>
         <jar basedir="../android/temp/classes" destfile="../temp/android/lib${name}.jar" update="true"/>
         
-        <!-- Copy resource files -->
         <copy todir="../temp/android/res/">
             <fileset dir="../android/res"/>
         </copy>
@@ -91,11 +91,13 @@
             <regexpmapper from=".*src.(.*)\.as" to="\1"/>
         </pathconvert>
 
+		<echo message="Using swf version ${swf.version}."/>
+
         <exec executable="${flex.sdk}/bin/acompc${bin.ext}" failonerror="true">
             <env key="AIR_SDK_HOME" value="${flex.sdk}"/>
             <arg line='-source-path ../actionscript/src'/>
             <arg line='-output ../temp/swc/${name}.swc'/>
-            <arg line='-swf-version=14'/>
+            <arg line='-swf-version=${swf.version}'/>
             <arg line='-external-library-path+="${flex.sdk}/frameworks/libs/air/airglobal.swc"'/>
             <arg line='-include-classes ${classlist}'/>
         </exec>
@@ -122,7 +124,7 @@
         </exec>
 
         <move file="../temp/${name}.ane" todir="../bin"/>
-        <delete dir="../temp"/>
+        <!--<delete dir="../temp"/>-->
     </target>
 
 </project>

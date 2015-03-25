@@ -1,4 +1,4 @@
-package com.freshplanet.ane.AirCrashlytics.functions;
+package com.freshplanet.AirCrashlytics.functions;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREObject;
@@ -7,10 +7,8 @@ import com.crashlytics.android.Crashlytics;
 /**
  * Created by xviricel on 06/03/15.
  */
-public class LogFunction extends BaseFunction
-{
-	public FREObject call(FREContext context, FREObject[] args)
-	{
+public class LogFunction extends BaseFunction {
+	public FREObject call(FREContext context, FREObject[] args) {
 		super.call(context, args);
 
 		String message = getStringFromFREObject(args[0]);

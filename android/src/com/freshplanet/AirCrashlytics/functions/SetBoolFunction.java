@@ -16,32 +16,20 @@
 //  
 //////////////////////////////////////////////////////////////////////////////////////
 
-package com.freshplanet.ane.AirCrashlytics.functions;
-
-import android.app.Activity;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
+package com.freshplanet.AirCrashlytics.functions;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREObject;
+import com.crashlytics.android.Crashlytics;
 
-public class GetApiKeyFunction extends BaseFunction
-{
-	public FREObject call(FREContext context, FREObject[] args)
-	{
+public class SetBoolFunction extends BaseFunction {
+	public FREObject call(FREContext context, FREObject[] args) {
 		super.call(context, args);
-		
-		try
-		{
-			Activity activity = context.getActivity();
-			ApplicationInfo ai = activity.getPackageManager().getApplicationInfo(activity.getPackageName(), PackageManager.GET_META_DATA);
-		    String apiKey = ai.metaData.getString("com.crashlytics.ApiKey");
-			return FREObject.newObject(apiKey);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			return null;
-		}
+
+		String key = getStringFromFREObject(args[0]);
+		Boolean value = getBooleanFromFREObject(args[1]);
+		Crashlytics.setBool(key, value);
+
+		return null;
 	}
 }

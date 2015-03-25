@@ -16,22 +16,19 @@
 //  
 //////////////////////////////////////////////////////////////////////////////////////
 
-package com.freshplanet.ane.AirCrashlytics.functions;
+package com.freshplanet.AirCrashlytics.functions;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREObject;
 import com.crashlytics.android.Crashlytics;
 
-public class SetFloatFunction extends BaseFunction
-{
-	public FREObject call(FREContext context, FREObject[] args)
-	{
+public class SetDebugModeFunction extends BaseFunction {
+	public FREObject call(FREContext context, FREObject[] args) {
 		super.call(context, args);
-		
-		String key = getStringFromFREObject(args[0]);
-		double value = getDoubleFromFREObject(args[1]);
-		Crashlytics.setFloat(key, (float)value);
-		
+
+		Boolean debugMode = getBooleanFromFREObject(args[0]);
+		Crashlytics.getInstance().setDebugMode(debugMode);
+
 		return null;
 	}
 }

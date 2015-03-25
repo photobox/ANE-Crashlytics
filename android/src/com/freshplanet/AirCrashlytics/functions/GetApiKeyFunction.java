@@ -16,21 +16,27 @@
 //  
 //////////////////////////////////////////////////////////////////////////////////////
 
-package com.freshplanet.ane.AirCrashlytics.functions;
+package com.freshplanet.AirCrashlytics.functions;
+
+import android.app.Activity;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREObject;
-import com.crashlytics.android.Crashlytics;
 
-public class SetDebugModeFunction extends BaseFunction
-{
-	public FREObject call(FREContext context, FREObject[] args)
-	{
+public class GetApiKeyFunction extends BaseFunction {
+	public FREObject call(FREContext context, FREObject[] args) {
 		super.call(context, args);
-		
-		Boolean debugMode = getBooleanFromFREObject(args[0]);
-		Crashlytics.getInstance().setDebugMode(debugMode);
-		
-		return null;
+
+		try {
+			Activity activity = context.getActivity();
+			ApplicationInfo ai = activity.getPackageManager().getApplicationInfo(activity.getPackageName(), PackageManager.GET_META_DATA);
+			String apiKey = ai.metaData.getString("com.crashlytics.ApiKey");
+			return FREObject.newObject(apiKey);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

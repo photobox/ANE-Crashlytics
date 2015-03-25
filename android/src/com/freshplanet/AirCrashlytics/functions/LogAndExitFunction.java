@@ -16,24 +16,29 @@
 //  
 //////////////////////////////////////////////////////////////////////////////////////
 
-package com.freshplanet.ane.AirCrashlytics;
+package com.freshplanet.AirCrashlytics.functions;
 
+import android.util.Log;
 import com.adobe.fre.FREContext;
-import com.adobe.fre.FREExtension;
+import com.adobe.fre.FREObject;
+import com.crashlytics.android.Crashlytics;
 
-public class Extension implements FREExtension
-{
-	public static ExtensionContext context;
+public class LogAndExitFunction extends BaseFunction {
+	private static final String TAG = "AirCrashlytics";
 
-	public FREContext createContext(String extId)
-	{
-		return context = new ExtensionContext();
+	public FREObject call(FREContext context, FREObject[] args) {
+		super.call(context, args);
+
+		String name = getStringFromFREObject(args[0]);
+		String stack = getStringFromFREObject(args[1]);
+
+		Crashlytics.log(":: [ Crashlytics ] :: " + name + ", next step!! Develop a realy crash in Android... stack: " + stack);
+		Crashlytics.logException(new Exception("Crash app, name '" + name + "' stack: '" + stack + "'"));
+
+		Log.d(TAG, "Crash app, name '" + name + "' stack: '" + stack + "'");
+
+		//throw new RuntimeException("This is a crash");
+
+		return null;
 	}
-
-	public void dispose()
-	{
-		context = null;
-	}
-	
-	public void initialize() {}
 }

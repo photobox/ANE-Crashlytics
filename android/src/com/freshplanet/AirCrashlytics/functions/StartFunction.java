@@ -16,32 +16,18 @@
 //  
 //////////////////////////////////////////////////////////////////////////////////////
 
-package com.freshplanet.ane.AirCrashlytics.functions;
-
-import android.content.Intent;
+package com.freshplanet.AirCrashlytics.functions;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREObject;
-import com.freshplanet.ane.AirCrashlytics.activities.CrashActivity;
+import com.crashlytics.android.Crashlytics;
 
-public class CrashFunction extends BaseFunction
-{
-	public FREObject call(FREContext context, FREObject[] args)
-	{
+public class StartFunction extends BaseFunction {
+	public FREObject call(FREContext context, FREObject[] args) {
 		super.call(context, args);
-		
-		Intent intent = new Intent(context.getActivity().getApplicationContext(), CrashActivity.class);
-		Boolean activityDeclared = (context.getActivity().getPackageManager().resolveActivity(intent, 0) != null);
-		context.getActivity().startActivity(intent);
-		
-		try
-		{
-			return FREObject.newObject(activityDeclared);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			return null;
-		}
+
+		Crashlytics.start(context.getActivity());
+
+		return null;
 	}
 }

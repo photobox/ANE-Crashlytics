@@ -48,7 +48,7 @@ package com.freshplanet.ane.AirCrashlytics
 			
 			if (!worked && Capabilities.manufacturer.indexOf("Android") > -1)
 			{
-				logConsole("In order to force a crash on Android, you need to declare the following activity in your manifest: com.freshplanet.ane.AirCrashlytics.activities.CrashActivity");
+				logConsole("In order to force a crash on Android, you need to declare the following activity in your manifest: com.freshplanet.AirCrashlytics.activities.CrashActivity");
 			}
 		}
 		

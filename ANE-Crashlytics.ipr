@@ -209,8 +209,8 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ANE-Crashlytics.iml" filepath="$PROJECT_DIR$/ANE-Crashlytics.iml" />
       <module fileurl="file://$PROJECT_DIR$/actionscript/actionscript.iml" filepath="$PROJECT_DIR$/actionscript/actionscript.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/android.iml" filepath="$PROJECT_DIR$/android/android.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="AIRSDK 16.0" project-jdk-type="Flex SDK Type (new)">
@@ -332,9 +332,6 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="VcsDirectoryMappings">
-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="myTodoPanelSettings">
