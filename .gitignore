@@ -13,6 +13,10 @@ actionscript/bin
 .settings
 .project
 
+#IntelliJ config files
+.idea
+*.iws
+
 # Android
 android/assets
 android/bin
